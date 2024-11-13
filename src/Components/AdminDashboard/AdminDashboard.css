@@ -1,6 +1,7 @@
 .contentHeading{
     margin-bottom: 30px;
-    color: #02963e;
+    font-weight: 500;
+    /* color: #02963e; */
 }
 .dashboardContents{
     display: flex;
