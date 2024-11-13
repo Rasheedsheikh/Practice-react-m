@@ -1,7 +1,34 @@
+.contentHeading{
+    margin-bottom: 30px;
+    color: #02963e;
+}
 .dashboardContents{
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.dashboardContents .ant-card{
+    width: 400px;
+    margin-bottom: 30px;
 }
 .headerAndImage{
     display: flex;
     justify-content: space-between;
+}
+.orderListDiv{
+    position: relative;
+    bottom: 30px;
+}
+.serviceViewBtn{
+    height: 35px;
+    width: 190px;
+    font-weight: 500;
+    background: #02963e;
+    color: #fff;
+    border: 2px solid #02963e;
+}
+.serviceViewBtn:hover{
+    background: #00ea5f !important;
+    color: #000 !important;
+    border-color: #02963e !important;
 }
