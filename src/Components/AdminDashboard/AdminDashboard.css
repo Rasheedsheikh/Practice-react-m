@@ -1,0 +1,7 @@
+.dashboardContents{
+    display: flex;
+}
+.headerAndImage{
+    display: flex;
+    justify-content: space-between;
+}
