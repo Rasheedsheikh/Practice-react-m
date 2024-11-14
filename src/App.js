@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard';
 import Header from './Components/Header/Header';
+import OrderList from './Components/Admin/Orders/OrderList';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Header />
       <main className='main-content'>
         <Routes>
-          <Route exact path='/admindashboard' element={<AdminDashboard />} />
+          <Route path='/admin' element={<AdminDashboard />} />
+          <Route path='/admin/:itemId' element={<OrderList />} />
         </Routes>
       </main>
     </div>

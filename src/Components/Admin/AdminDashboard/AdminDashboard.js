@@ -1,10 +1,25 @@
 import { Button, Card } from 'antd'
 import React from 'react'
 import './AdminDashboard.css'
+import { useNavigate } from 'react-router-dom'
+import CustomBreadcrumb from '../../CustomComponents/CustomBreadCrumb'
 
 const AdminDashboard = () => {
+
+    const navigate = useNavigate();
+
+    const breadcrumbItems = [
+        { label: 'Home', link: '/' },
+        { label: 'Admin' } //  current page
+    ];
+
+    const handleViewOrders = (e) => {
+        navigate(`/admin/${e}`)
+    }
+
     return (
         <>
+            <CustomBreadcrumb items={breadcrumbItems} />
             <h2 className='contentHeading'>Dashboard</h2>
             <div className='dashboardContents'>
                 <Card className='dashboardContentCard'>
@@ -16,7 +31,7 @@ const AdminDashboard = () => {
                         <p>Total orders <b>14</b></p>
                         <p>Pending orders <b>10</b></p>
                     </div>
-                    <Button className='serviceViewBtn'>View</Button>
+                    <Button onClick={() => handleViewOrders('1')} className='serviceViewBtn'>View orders</Button>
                 </Card>
                 <Card className='dashboardContentCard'>
                     <div className='headerAndImage'>
@@ -27,7 +42,7 @@ const AdminDashboard = () => {
                         <p>Total orders <b>14</b></p>
                         <p>Pending orders <b>10</b></p>
                     </div>
-                    <Button className='serviceViewBtn'>View</Button>
+                    <Button onClick={() => handleViewOrders('2')} className='serviceViewBtn'>View orders</Button>
                 </Card>
                 <Card className='dashboardContentCard'>
                     <div className='headerAndImage'>
@@ -38,7 +53,7 @@ const AdminDashboard = () => {
                         <p>Total orders <b>14</b></p>
                         <p>Pending orders <b>10</b></p>
                     </div>
-                    <Button className='serviceViewBtn'>View</Button>
+                    <Button onClick={() => handleViewOrders('3')} className='serviceViewBtn'>View orders</Button>
                 </Card>
                 {/* <Card className='dashboardContentCard'>
                     <div className='headerAndImage'>
@@ -49,7 +64,7 @@ const AdminDashboard = () => {
                     <p>Total orders <b>14</b></p>
                         <p>Pending orders <b>10</b></p>
                     </div>
-                    <Button className='serviceViewBtn'>View</Button>
+                    <Button className='serviceViewBtn'>View orders</Button>
                 </Card> */}
             </div>
         </>
