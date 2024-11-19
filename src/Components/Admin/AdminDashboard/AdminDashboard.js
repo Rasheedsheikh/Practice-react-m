@@ -1,9 +1,12 @@
 import { Button, Card, Input, Modal, Upload } from 'antd'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './AdminDashboard.css'
 import { useNavigate } from 'react-router-dom'
 import CustomBreadcrumb from '../../CustomComponents/CustomBreadCrumb'
 import { DeleteOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons'
+import axios from 'axios'
+import { BaseUrl } from '../../Constants/Constant'
+import NotificationProvider from '../../CustomComponents/CustomNotificationProvider'
 
 const AdminDashboard = () => {
 
@@ -14,6 +17,8 @@ const AdminDashboard = () => {
     const [addModal, setAddModal] = useState(false);
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [itemName, setItemName] = useState('');
+    const [modalBtnLoading, setModalBtnLoading] = useState(false);
+    const [serviceItems, setServiceItems] = useState([]);
 
     const breadcrumbItems = [
         { label: 'Home', link: '/' },
@@ -21,12 +26,60 @@ const AdminDashboard = () => {
     ];
 
 
+    useEffect(() => {
+        getAllServiceItems();
+    }, [])
+
+
+    const createServiceItem = () => {
+        if (itemName != '') {
+            setModalBtnLoading(true);
+            let body = {
+                itemName: itemName,
+                itemImg: null
+            }
+            axios.post(`${BaseUrl}/service-items/createServiceItem`, body)
+                .then((res) => {
+                    if (res.data.statuscode === 200) {
+                        NotificationProvider.showSuccess('Success!', 'Item created successfully!')
+                    } else {
+                        NotificationProvider.showError('Oops!', 'Please try after some time.')
+                    }
+                })
+                .catch(err => {
+                    console.log(err.message);
+                    NotificationProvider.showError('Oops!', err.message)
+                })
+                .finally(() => {
+                    setAddModal(false);
+                    setModalBtnLoading(false);
+                    setItemName('');
+                })
+        } else {
+            NotificationProvider.showWarning('Warning!', 'Please fill all the fields!');
+        }
+    }
+
+    const getAllServiceItems = () => {
+        axios.get(`${BaseUrl}/service-items/findAllServiceItems`)
+            .then((res) => {
+                if (res.data.statuscode === 200) {
+                    setServiceItems(res.data.data);
+                } else {
+                    setServiceItems([]);
+                }
+            })
+            .catch(err => {
+                NotificationProvider.showError('Oops!', err.message);
+            })
+    }
+
     const handleUploadRef = () => {
         fileInputRef.current.click();
     }
 
     const handleViewOrders = (e) => {
-        navigate(`/admin/${e}`)
+        navigate(`/admin/order/${e}`)
     }
 
     const handleOpenAddModal = () => {
@@ -35,6 +88,7 @@ const AdminDashboard = () => {
 
     const handleCancelAddModal = () => {
         setAddModal(false);
+        setItemName('');
     }
 
     const handleFileChange = (event) => {
@@ -48,9 +102,9 @@ const AdminDashboard = () => {
 
     return (
         <>
-            <Modal title='Add Modal' open={addModal} onCancel={handleCancelAddModal} >
+            <Modal title='Add Modal' open={addModal} onCancel={handleCancelAddModal} footer={null} >
                 <p className='modalInputHeadings'>Item Name</p>
-                <Input onChange={(e) => setItemName(e.target.value)} placeholder='Enter item name' className='modalInputs' />
+                <Input value={itemName} onChange={(e) => setItemName(e.target.value)} placeholder='Enter item name' className='modalInputs' />
                 <p className='modalInputHeadings'>Item Image</p>
                 <input type='file' id='actual-btn' hidden ref={fileInputRef} onChange={handleFileChange} multiple={false} />
                 <div>
@@ -73,6 +127,9 @@ const AdminDashboard = () => {
                         </ul>
                     </div>
                 </div>
+                <div className='modalButtonDiv'>
+                    <Button loading={modalBtnLoading} onClick={createServiceItem} className='modalSubmit'>Submit</Button>
+                </div>
             </Modal>
             <CustomBreadcrumb items={breadcrumbItems} />
             <div className='headingAndAddItem'>
@@ -80,50 +137,29 @@ const AdminDashboard = () => {
                 <Button className='addItem' onClick={handleOpenAddModal} icon={<PlusOutlined />}>Add Item</Button>
             </div>
             <div className='dashboardContents'>
-                <Card className='dashboardContentCard'>
-                    <div className='headerAndImage'>
-                        <h3>Washing Machine</h3>
-                        <img src='/Assets/washing-machine.png' alt='washing machine' width={70} height={70} />
-                    </div>
-                    <div className='orderListDiv'>
-                        <p>Total orders <b>14</b></p>
-                        <p>Pending orders <b>10</b></p>
-                    </div>
-                    <Button onClick={() => handleViewOrders('1')} className='serviceViewBtn'>View orders</Button>
-                </Card>
-                <Card className='dashboardContentCard'>
-                    <div className='headerAndImage'>
-                        <h3>Refrigerator</h3>
-                        <img src='/Assets/smart-fridge.png' alt='smart-fridge' width={70} height={70} />
-                    </div>
-                    <div className='orderListDiv'>
-                        <p>Total orders <b>14</b></p>
-                        <p>Pending orders <b>10</b></p>
-                    </div>
-                    <Button onClick={() => handleViewOrders('2')} className='serviceViewBtn'>View orders</Button>
-                </Card>
-                <Card className='dashboardContentCard'>
-                    <div className='headerAndImage'>
-                        <h3>Air Conditioner</h3>
-                        <img src='/Assets/air-conditioner.png' alt='air-conditioner' width={70} height={70} />
-                    </div>
-                    <div className='orderListDiv'>
-                        <p>Total orders <b>14</b></p>
-                        <p>Pending orders <b>10</b></p>
-                    </div>
-                    <Button onClick={() => handleViewOrders('3')} className='serviceViewBtn'>View orders</Button>
-                </Card>
-                {/* <Card className='dashboardContentCard'>
-                    <div className='headerAndImage'>
-                        <h3>Air Conditioner</h3>
-                        <img src='/Assets/washing-machine.png' alt='washing machine' width={70} height={70} />
-                    </div>
-                    <div className='orderListDiv'>
-                    <p>Total orders <b>14</b></p>
-                        <p>Pending orders <b>10</b></p>
-                    </div>
-                    <Button className='serviceViewBtn'>View orders</Button>
-                </Card> */}
+                {
+                    serviceItems.length !== 0 ?
+                        serviceItems.map(item => (
+                            <>
+                                <Card className='dashboardContentCard' key={item.item_id}>
+                                    <div className='headerAndImage'>
+                                        <h3>{item.item_name}</h3>
+                                        <img src={item.item_img !== null ? item.item_img : `/assets/customer-service.png`} alt='item image' width={70} height={70} />
+                                    </div>
+                                    <div className='orderListDiv'>
+                                        <p>Total orders <b>14</b></p>
+                                        <p>Pending orders <b>10</b></p>
+                                    </div>
+                                    <Button onClick={() => handleViewOrders(item.item_id)} className='serviceViewBtn'>View orders</Button>
+                                </Card></>
+                        ))
+                        :
+                        <>
+                            <div style={{ width: '100%', textAlign: 'center' }}>
+                                <h3>No Items</h3>
+                            </div>
+                        </>
+                }
             </div>
         </>
     )

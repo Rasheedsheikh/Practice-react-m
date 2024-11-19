@@ -193,3 +193,21 @@
   .delete-button:hover {
     color: #ff7875;
   }
+  .modalButtonDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .modalSubmit{
+    height: 35px;
+    width: 190px;
+    font-weight: 500;
+    background: #02963e;
+    color: #fff;
+    border: 2px solid #02963e;
+}
+.modalSubmit:hover{
+    background: #49e085 !important;
+    color: #005a24 !important;
+    border-color: #02963e !important;
+}

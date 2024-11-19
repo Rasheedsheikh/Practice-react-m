@@ -31,3 +31,10 @@
     background-color: rgb(255 255 255 / 4%);
     font-weight: 500;
 }
+.modalSelectClass.ant-select-disabled .ant-select-selector{
+    color: rgb(151 19 19) !important;
+    background-color: rgb(255 255 255 / 4%) !important;
+}
+.modalSelectClass.ant-select .ant-select-selection-item{
+    font-weight: 500 !important;
+}

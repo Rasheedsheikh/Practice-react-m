@@ -12,7 +12,7 @@ function App() {
       <main className='main-content'>
         <Routes>
           <Route path='/admin' element={<AdminDashboard />} />
-          <Route path='/admin/:itemId' element={<OrderList />} />
+          <Route path='/admin/order/:itemId' element={<OrderList />} />
           <Route path='/admin/employees' element={<EmployeeDetails />} />
         </Routes>
       </main>
