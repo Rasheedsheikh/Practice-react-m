@@ -11,7 +11,7 @@ const AdminDashboard = () => {
     const breadcrumbItems = [
         { label: 'Home', link: '/' },
         { label: 'Admin' } //  current page
-    ];
+    ];  
 
     const handleViewOrders = (e) => {
         navigate(`/admin/${e}`)

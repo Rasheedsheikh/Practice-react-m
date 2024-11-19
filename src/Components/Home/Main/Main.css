@@ -1,0 +1,14 @@
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  color: #333 !important; /* Dark arrow color */
+}
+
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+  color: #000 !important; /* Darker arrow color on hover */
+}
+
+.ant-carousel .slick-prev::before,
+.ant-carousel .slick-next::before {
+  font-size: 18px; /* Adjust size if needed */
+}

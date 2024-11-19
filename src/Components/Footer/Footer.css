@@ -1,0 +1,133 @@
+footer {
+    display: flex;
+    justify-content: space-around;
+    grid-template-rows: auto auto;
+    background-color: #fff;
+    gap: 5%;
+    /* grid-template-columns: repeat(3, 1fr); */
+
+}
+
+footer .first-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+footer .second-row{
+    margin: 1em;
+    padding-top:1em ;
+    text-align: center;
+    border-top: 2px solid rgb(197, 195, 195) ;
+}
+.second-row span{
+    
+    color: white;
+    font-family: 'Lobster', cursive;
+}
+
+footer .company-information{
+    display: grid;
+    grid-template-rows: auto auto;
+    margin: 1em;
+}
+.company-information img{
+    height: 3em;
+}
+.company-information .name-logo{
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+.company-information .name{
+    font-size: 2em;
+    font-family: 'Lobster', cursive;
+}
+.company-information span{
+    color: rgb(10, 115, 163);
+    font-size: 1.5em;
+    font-family: 'Lobster', cursive;
+}
+.company-information .info{
+    
+    color: rgb(199, 203, 207);
+    font-family: 'Fjalla One', sans-serif;
+}
+.footer-services .title{
+    color:black;
+    margin: 1em 0.3em;
+}
+
+.footer-services li{
+    list-style: none;
+    padding: 0.6em;
+    color: rgb(62, 62, 63);
+    border-radius: 1em;
+    width:auto;
+    transition: background-color 0.2s linear;
+}
+.footer-services li:hover{
+    background-color: rgb(156, 155, 155);
+}
+footer .links{
+    display: grid;
+    grid-template-rows: auto auto;
+    align-items: end;
+}
+footer .icons{
+    display: flex;
+}
+.links .title{
+    color: rgb(199, 202, 204);
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+footer .icon{
+ margin: 1em;
+ font-size: 1.5em;
+ transition: transform 0.3s linear;
+}
+
+footer .icon:hover{
+    transform: rotate(180deg);
+    animation: icon 0.7s;
+    animation-fill-mode: forwards;
+}
+
+
+footer .facebook{
+    color: rgb(0, 68, 255);
+}
+footer .git{
+    color:rgb(14, 27, 39)
+}
+footer .twitter{
+    color:rgb(2, 133, 248);
+}
+footer .linkedin{
+    color:rgb(10, 102, 194);
+}
+footer .email{
+    color:rgb(0, 0, 0);
+}
+
+@keyframes icon {
+    0%{
+        transform: rotate(0deg);
+    }
+    30%{
+        transform: rotate(90deg);
+    }
+    60%{
+        transform: rotate(-90deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}

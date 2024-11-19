@@ -3,6 +3,10 @@ import './App.css';
 import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard';
 import Header from './Components/Header/Header';
 import OrderList from './Components/Admin/Orders/OrderList';
+import Slides from './Components/Home/Carousel/Slides';
+import Footer from './Components/Footer/Footer';
+import Registration from './Components/Register/Registration';
+// import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
@@ -12,8 +16,12 @@ function App() {
         <Routes>
           <Route path='/admin' element={<AdminDashboard />} />
           <Route path='/admin/:itemId' element={<OrderList />} />
+          <Route path= "" element ={<Slides/>}/>
+          <Route path="/registration" element={<Registration/>}/>
         </Routes>
       </main>
+      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

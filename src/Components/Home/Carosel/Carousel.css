@@ -1,0 +1,35 @@
+.carousel .inner{
+    display: inline-flex;
+    transition: transform 0.5s linear;
+    padding: 0 1em;
+}
+
+.carousel .item{
+    height: 100px;
+    width: 300px;
+    background-color: pink;
+    margin-left: 1em;
+}
+.carousel{
+    position: relative;
+    max-width: 80vw;
+    overflow: hidden;
+    padding: 1.3em 1em;
+}
+.carousel  .carousel-btn{
+    z-index: 10;
+    top:45%;
+    position: absolute;
+    font-size: 1.5em;
+    background-color:rgb(23, 113, 187);
+    color: white;
+    border-radius: 0.5em;
+    padding: 0.2em 0.4em;
+}
+
+.carousel .right-btn{
+    right: 0;
+}
+.carousel .left-btn{
+    left:0;
+}
