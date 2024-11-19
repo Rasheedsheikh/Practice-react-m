@@ -1,0 +1,40 @@
+.editModalClass{
+    width: 700px !important;
+}
+.editModalClass .ant-modal-content{
+    height: 600px;
+    overflow-y: scroll;
+}
+.modalInputHeadings{
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.modalInputs{
+    margin-bottom: 20px;
+    height: 40px;
+    border-width: 2px;
+    resize: none !important;
+}
+.modalDatepickerClass{
+    margin-bottom: 20px;
+    width: 220px;
+    height: 35px;
+}
+.modalSelectClass{
+    margin-bottom: 20px;
+    width: 220px;
+    height: 35px;
+}
+.modalInputs.ant-input-disabled{
+    color: rgb(151 19 19);
+    background-color: rgb(255 255 255 / 4%);
+    font-weight: 500;
+}
+.modalSelectClass.ant-select-disabled .ant-select-selector{
+    color: rgb(151 19 19) !important;
+    background-color: rgb(255 255 255 / 4%) !important;
+}
+.modalSelectClass.ant-select .ant-select-selection-item{
+    font-weight: 500 !important;
+}
