@@ -12,6 +12,9 @@ import EmployeeDetails from './Components/Admin/Employee/EmployeeDetails/Employe
 function App() {
   return (
     <div className="app-container">
+        <Routes>
+        <Route path='/admin' element={<AdminDashboard />} />
+        </Routes>
       <Header />
       <main className='main-content'>
         <Routes>

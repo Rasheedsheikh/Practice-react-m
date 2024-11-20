@@ -5,6 +5,7 @@
   padding-top: 20px;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
+  background-image: linear-gradient;
 }
 .about-us-container {
     display: flex;

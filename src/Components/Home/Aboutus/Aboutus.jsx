@@ -13,15 +13,14 @@ const Aboutus = () => {
     });
   }, []);
   return (
-    <div id="aboutus" className="about-us-main"   data-aos="fade-up" // Animation effect
+    <div id="aboutus" className="about-us-main" data-aos="fade-up" 
     data-aos-delay={100} >
     <Typography variant="h3" align="center" gutterBottom >
         About Us
       </Typography>
     <div className="about-us-container">
 
-
-      <div className="about-us-image">
+    <div className="about-us-image">
         <img
           src="https://www.cio.com/wp-content/uploads/2024/01/shutterstock_1095953582.jpg?quality=50&strip=all&w=1024"
           alt="About Us"
