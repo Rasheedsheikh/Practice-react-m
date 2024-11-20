@@ -573,9 +573,12 @@ const AllOrdersList = () => {
                         :
                         <></>
                 }
-                <Col offset={1} span={4}>
-                    <Button className='filterBtn' onClick={handleClearFilter}>Clear Filters</Button>
-                </Col>
+                {
+                    filterBy &&
+                    <Col offset={1} span={4}>
+                        <Button className='filterBtn' onClick={handleClearFilter}>Clear Filters</Button>
+                    </Col>
+                }
 
             </Row>
             <Table columns={columns} dataSource={pinCodeFilter || technicianFilter || dateFilter ? filteredData : tableItems} />
