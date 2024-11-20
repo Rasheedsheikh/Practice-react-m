@@ -8,6 +8,7 @@ import Footer from './Components/Footer/Footer';
 import Registration from './Components/Register/Registration';
 // import Footer from './Components/Footer/Footer';
 import EmployeeDetails from './Components/Admin/Employee/EmployeeDetails/EmployeeDetails';
+import AllOrdersList from './Components/Admin/Orders/AllOrdersList';
 
 function App() {
   return (
@@ -17,13 +18,14 @@ function App() {
         <Routes>
           <Route path='/admin' element={<AdminDashboard />} />
           <Route path='/admin/:itemId' element={<OrderList />} />
-          <Route path= "" element ={<Slides/>}/>
-          <Route path="/registration" element={<Registration/>}/>
+          <Route path="" element={<Slides />} />
+          <Route path="/registration" element={<Registration />} />
           <Route path='/admin/order/:itemId' element={<OrderList />} />
+          <Route path='/admin/orders' element={<AllOrdersList />} />
           <Route path='/admin/employees' element={<EmployeeDetails />} />
         </Routes>
       </main>
-      <Footer/>
+      <Footer />
       {/* <Footer/> */}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CustomBreadcrumb from '../../CustomComponents/CustomBreadCrumb'
-import { Button, DatePicker, Input, Modal, Select, Space, Table } from 'antd';
+import { Button, Col, DatePicker, Input, Modal, Row, Select, Space, Table } from 'antd';
 import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 import './OrderList.css'
 import axios from 'axios';
@@ -12,14 +12,10 @@ import moment from 'moment';
 
 const { TextArea } = Input;
 
-const OrderList = () => {
-
-    const { itemId } = useParams();
-
+const AllOrdersList = () => {
 
     const [editModal, setEditModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
-    const [itemName, setItemName] = useState('');
     const [orderId, setOrderId] = useState('');
     const [tableItems, setTableItems] = useState([]);
     const [customerFirstName, setCustomerFirstName] = useState('');
@@ -48,6 +44,11 @@ const OrderList = () => {
     const [review, setReview] = useState('');
     const [modalBtnLoading, setModalBtnLoading] = useState(false);
     const [employeesList, setEmployeesList] = useState([]);
+    const [technicianFilter, setTechnicianFilter] = useState('');
+    const [pinCodeFilter, setPincodeFilter] = useState('');
+    const [dateFilter, setDateFilter] = useState(null);
+    const [filterBy, setFilterBy] = useState(null);
+    const [filteredData, setFilteredData] = useState([]);
 
     console.log(technician, 'allEMployeeList')
 
@@ -138,7 +139,6 @@ const OrderList = () => {
     ];
 
     useEffect(() => {
-        getServiceItemName();
         getOrders();
         getAllEMployees();
     }, []);
@@ -165,26 +165,9 @@ const OrderList = () => {
             })
     }
 
-    const getServiceItemName = () => {
-        let body = {
-            itemId: itemId
-        }
-        axios.post(`${BaseUrl}/service-items/findOneServiceItem`, body)
-            .then((res) => {
-                if (res.data.statuscode === 200) {
-                    setItemName(res.data.data.item_name);
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
-    }
 
     const getOrders = () => {
-        let body = {
-            itemId: itemId
-        }
-        axios.post(`${BaseUrl}/order-details/findOneByServiceItem`, body)
+        axios.get(`${BaseUrl}/order-details/findAllOrders`)
             .then((res) => {
                 console.log(res.data, 'responseData');
                 if (res.data.statuscode === 200) {
@@ -255,7 +238,7 @@ const OrderList = () => {
         setDistrict(e.district);
         setPincode(e.pincode);
         setContactNumber(e.contact_number);
-        setCategory(itemName);
+        setCategory(e.category);
         setTypeLoad(e.type_load);
         setBrandName(e.brand_name);
         setProblems(e.problems);
@@ -287,7 +270,7 @@ const OrderList = () => {
         setDistrict(e.district);
         setPincode(e.pincode);
         setContactNumber(e.contact_number);
-        setCategory(itemName);
+        setCategory(e.category);
         setTypeLoad(e.type_load);
         setBrandName(e.brand_name);
         setProblems(e.problems);
@@ -307,6 +290,63 @@ const OrderList = () => {
     const handleCancelView = () => {
         setViewModal(false);
     }
+
+    const handleFilters = () => {
+        const filtered = tableItems.filter((item) => {
+            const matchesPincode = item.pincode.toLowerCase().includes(pinCodeFilter.toLowerCase());
+            const matchesTechnician = item.technician_name.toLowerCase().includes(technicianFilter.toLowerCase());
+            return matchesPincode && matchesTechnician;
+        })
+        setFilteredData(filtered);
+    }
+    const handlePincodeFilters = (e) => {
+        setPincodeFilter(e);
+        const pinCodeInput = e;
+        const filtered = tableItems.filter((item) => {
+            const matchesPincode = item.pincode.toLowerCase().includes(pinCodeInput.toString().toLowerCase());
+            return matchesPincode;
+        })
+        setFilteredData(filtered);
+    }
+
+    const handleTechnicianFilters = (e) => {
+        setTechnicianFilter(e);
+        const technicianInput = e.toString().toLowerCase();
+        const filtered = tableItems.filter((item) => {
+            const technicianName = item.technician_name ? item.technician_name.toLowerCase() : '';
+            return technicianName.includes(technicianInput);
+        });
+        setFilteredData(filtered);
+    };
+
+    const handleDateFilter = (date, dateString) => {
+        if (!date) {
+            setFilteredData(tableItems);
+            setDateFilter(null);
+            return;
+        }
+
+        setDateFilter(date);
+
+        const filtered = tableItems.filter((item) => {
+            const correctDateString = item.created_at.split('T')[0];
+            return (
+                moment(correctDateString).format('DD-MM-YYYY') === dateString
+            )
+        }
+        );
+
+        setFilteredData(filtered);
+    }
+
+    const handleClearFilter = () => {
+        setFilterBy(null);
+        setPincodeFilter('');
+        setTechnicianFilter('');
+        setDateFilter(null);
+    }
+
+
 
 
 
@@ -486,10 +526,69 @@ const OrderList = () => {
                 <TextArea disabled value={review} onChange={(e) => setReview(e.target.value)} rows={3} className='modalInputs' placeholder='Enter review' />
             </Modal>
             <CustomBreadcrumb items={breadcrumbItems} />
-            <h2 className='contentHeading'>Orders - {itemName}</h2>
-            <Table columns={columns} dataSource={tableItems} />
+            <h2 className='contentHeading'>All Orders</h2>
+            {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}> */}
+            <Row style={{}}>
+                <Col span={5}>
+                    <Select style={{ width: '100%', height: '40px', marginBottom: '20px' }}
+                        placeholder='Filter by'
+                        value={filterBy}
+                        options={[
+                            {
+                                label: 'Filter by Pincode',
+                                value: 'pincode'
+                            },
+                            {
+                                label: 'Filter by Date',
+                                value: 'date'
+                            },
+                            {
+                                label: 'Filter by Technician',
+                                value: 'technician'
+                            }
+                        ]}
+                        onChange={(val) => {
+                            setFilteredData(tableItems);
+                            setFilterBy(val)
+                        }}
+                    />
+                </Col>
+                {
+                    filterBy === 'pincode' ?
+                        <Col offset={1} span={6}>
+                            <Input placeholder='Filter by Pincode' className='modalInputs'
+                                onChange={(e) => handlePincodeFilters(e.target.value)}
+                            />
+                        </Col>
+                        :
+                        <></>
+                }
+                {
+                    filterBy === 'date' ?
+                        <Col offset={1} span={6}>
+                            <DatePicker format={'DD-MM-YYYY'} onChange={handleDateFilter} placeholder='Filter by Date' className='filterDatePicker' />
+                        </Col>
+                        :
+                        <></>
+                }
+                {
+                    filterBy === 'technician' ?
+                        <Col offset={1} span={6}>
+                            <Input placeholder='Filter by Technician' className='modalInputs'
+                                onChange={(e) => handleTechnicianFilters(e.target.value)}
+                            />
+                        </Col>
+                        :
+                        <></>
+                }
+                <Col offset={1} span={4}>
+                    <Button className='filterBtn' onClick={handleClearFilter}>Clear Filters</Button>
+                </Col>
+
+            </Row>
+            <Table columns={columns} dataSource={pinCodeFilter || technicianFilter || dateFilter ? filteredData : tableItems} />
         </div>
     )
 }
 
-export default OrderList
+export default AllOrdersList
