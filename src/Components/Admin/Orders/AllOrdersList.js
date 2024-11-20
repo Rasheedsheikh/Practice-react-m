@@ -291,14 +291,7 @@ const AllOrdersList = () => {
         setViewModal(false);
     }
 
-    const handleFilters = () => {
-        const filtered = tableItems.filter((item) => {
-            const matchesPincode = item.pincode.toLowerCase().includes(pinCodeFilter.toLowerCase());
-            const matchesTechnician = item.technician_name.toLowerCase().includes(technicianFilter.toLowerCase());
-            return matchesPincode && matchesTechnician;
-        })
-        setFilteredData(filtered);
-    }
+
     const handlePincodeFilters = (e) => {
         setPincodeFilter(e);
         const pinCodeInput = e;
@@ -527,8 +520,7 @@ const AllOrdersList = () => {
             </Modal>
             <CustomBreadcrumb items={breadcrumbItems} />
             <h2 className='contentHeading'>All Orders</h2>
-            {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}> */}
-            <Row style={{}}>
+            <Row>
                 <Col span={5}>
                     <Select style={{ width: '100%', height: '40px', marginBottom: '20px' }}
                         placeholder='Filter by'
