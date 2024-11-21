@@ -18,10 +18,10 @@ html, body {
 }
 
 .main-content {
-  flex-grow: 1; /* Allows the main content to grow and take available space */
+  flex-grow: 1; 
   /* padding: 20px; */
-  /* margin-top: 80px; */
   background-color: #E0EBE6;
+  margin-top: 80px;
 }
 
 .App {

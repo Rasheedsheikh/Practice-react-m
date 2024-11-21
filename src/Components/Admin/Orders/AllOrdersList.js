@@ -12,14 +12,10 @@ import moment from 'moment';
 
 const { TextArea } = Input;
 
-const OrderList = () => {
-
-    const { itemId } = useParams();
-
+const AllOrdersList = () => {
 
     const [editModal, setEditModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
-    const [itemName, setItemName] = useState('');
     const [orderId, setOrderId] = useState('');
     const [tableItems, setTableItems] = useState([]);
     const [customerFirstName, setCustomerFirstName] = useState('');
@@ -143,7 +139,6 @@ const OrderList = () => {
     ];
 
     useEffect(() => {
-        getServiceItemName();
         getOrders();
         getAllEMployees();
     }, []);
@@ -170,26 +165,9 @@ const OrderList = () => {
             })
     }
 
-    const getServiceItemName = () => {
-        let body = {
-            itemId: itemId
-        }
-        axios.post(`${BaseUrl}/service-items/findOneServiceItem`, body)
-            .then((res) => {
-                if (res.data.statuscode === 200) {
-                    setItemName(res.data.data.item_name);
-                }
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
-    }
 
     const getOrders = () => {
-        let body = {
-            itemId: itemId
-        }
-        axios.post(`${BaseUrl}/order-details/findOneByServiceItem`, body)
+        axios.get(`${BaseUrl}/order-details/findAllOrders`)
             .then((res) => {
                 console.log(res.data, 'responseData');
                 if (res.data.statuscode === 200) {
@@ -260,7 +238,7 @@ const OrderList = () => {
         setDistrict(e.district);
         setPincode(e.pincode);
         setContactNumber(e.contact_number);
-        setCategory(itemName);
+        setCategory(e.category);
         setTypeLoad(e.type_load);
         setBrandName(e.brand_name);
         setProblems(e.problems);
@@ -292,7 +270,7 @@ const OrderList = () => {
         setDistrict(e.district);
         setPincode(e.pincode);
         setContactNumber(e.contact_number);
-        setCategory(itemName);
+        setCategory(e.category);
         setTypeLoad(e.type_load);
         setBrandName(e.brand_name);
         setProblems(e.problems);
@@ -360,6 +338,7 @@ const OrderList = () => {
         setTechnicianFilter('');
         setDateFilter(null);
     }
+
 
 
 
@@ -540,7 +519,7 @@ const OrderList = () => {
                 <TextArea disabled value={review} onChange={(e) => setReview(e.target.value)} rows={3} className='modalInputs' placeholder='Enter review' />
             </Modal>
             <CustomBreadcrumb items={breadcrumbItems} />
-            <h2 className='contentHeading'>Orders - {itemName}</h2>
+            <h2 className='contentHeading'>All Orders</h2>
             <Row>
                 <Col span={5}>
                     <Select style={{ width: '100%', height: '40px', marginBottom: '20px' }}
@@ -602,9 +581,9 @@ const OrderList = () => {
                 }
 
             </Row>
-            <Table pagination={{ pageSize: 10 }} columns={columns} dataSource={pinCodeFilter || technicianFilter || dateFilter ? filteredData : tableItems} />
+            <Table columns={columns} dataSource={pinCodeFilter || technicianFilter || dateFilter ? filteredData : tableItems} />
         </div>
     )
 }
 
-export default OrderList
+export default AllOrdersList

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Row, Col, Select, message } from "antd";
 import "./Registration.css"; 
+import { BaseUrl } from '../../Constants/Constant'
 
 const Registration = () => {
   const [services, setServices] = useState([]);
@@ -11,7 +12,7 @@ const Registration = () => {
     const fetchServices = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/service-items/findAllServiceItems");
+        const response = await fetch(`${BaseUrl}/service-items/findAllServiceItems`);
         const data = await response.json();
         setServices(data.data); // Using the 'data' key from the response
       } catch (error) {
@@ -43,7 +44,7 @@ const Registration = () => {
 
 
     try {
-      const response = await fetch("http://localhost:3000/order-details/createOrder", {
+      const response = await fetch(`${BaseUrl}order-details/createOrder`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

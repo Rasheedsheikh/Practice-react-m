@@ -140,6 +140,16 @@ const EmployeeDetails = () => {
 
     const handleCancelEdit = () => {
         setEditModal(false);
+        setEmployeeName("");
+        setEmail("");
+        setMobileNumber("");
+        setRole("");
+        setAadhaarNumber("");
+        setPanNumber("");
+        setAddress("");
+        setState("");
+        setDistrict("");
+        setPincode("");
     }
 
     const handleOpenViewModal = (e) => {
@@ -160,6 +170,16 @@ const EmployeeDetails = () => {
 
     const handleCancelView = () => {
         setViewModal(false);
+        setEmployeeName("");
+        setEmail("");
+        setMobileNumber("");
+        setRole("");
+        setAadhaarNumber("");
+        setPanNumber("");
+        setAddress("");
+        setState("");
+        setDistrict("");
+        setPincode("");
     }
 
     const handleCancelAdd = () => {
@@ -245,13 +265,13 @@ const EmployeeDetails = () => {
                 <p className='modalInputHeadings'>PAN Number</p>
                 <Input value={panNumber} onChange={(e) => setPanNumber(e.target.value)} placeholder='Enter PAN number' rows={3} className='modalInputs' />
                 <p className='modalInputHeadings'>Address</p>
-                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter state' className='modalInputs' />
+                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter address' className='modalInputs' />
                 <p className='modalInputHeadings'>District</p>
-                <Input value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter district' className='modalInputs' />
                 <p className='modalInputHeadings'>State</p>
                 <Input value={state} onChange={(e) => setState(e.target.value)} placeholder='Enter state' className='modalInputs' />
                 <p className='modalInputHeadings'>Pincode</p>
-                <Input value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter pincode' className='modalInputs' />
                 <div className='modalButtonDiv'>
                     <Button loading={modalBtnLoading} onClick={addNewEmployees} className='modalSubmit'>Submit</Button>
                 </div>
@@ -270,13 +290,13 @@ const EmployeeDetails = () => {
                 <p className='modalInputHeadings'>PAN Number</p>
                 <TextArea value={panNumber} onChange={(e) => setPanNumber(e.target.value)} placeholder='Enter PAN number' rows={3} className='modalInputs' />
                 <p className='modalInputHeadings'>Address</p>
-                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter state' className='modalInputs' />
+                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter address' className='modalInputs' />
                 <p className='modalInputHeadings'>District</p>
-                <Input value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter district' className='modalInputs' />
                 <p className='modalInputHeadings'>State</p>
                 <Input value={state} onChange={(e) => setState(e.target.value)} placeholder='Enter state' className='modalInputs' />
                 <p className='modalInputHeadings'>Pincode</p>
-                <Input value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter pincode' className='modalInputs' />
                 <div className='modalButtonDiv'>
                     <Button loading={modalBtnLoading} onClick={addNewEmployees} className='modalSubmit'>Update</Button>
                 </div>
@@ -295,13 +315,13 @@ const EmployeeDetails = () => {
                 <p className='modalInputHeadings'>PAN Number</p>
                 <TextArea disabled value={panNumber} onChange={(e) => setPanNumber(e.target.value)} placeholder='Enter PAN number' rows={3} className='modalInputs' />
                 <p className='modalInputHeadings'>Address</p>
-                <Input disabled value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter state' className='modalInputs' />
+                <Input disabled value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter address' className='modalInputs' />
                 <p className='modalInputHeadings'>District</p>
-                <Input disabled value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input disabled value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter district' className='modalInputs' />
                 <p className='modalInputHeadings'>State</p>
                 <Input disabled value={state} onChange={(e) => setState(e.target.value)} placeholder='Enter state' className='modalInputs' />
                 <p className='modalInputHeadings'>Pincode</p>
-                <Input disabled value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter brand' className='modalInputs' />
+                <Input disabled value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder='Enter pincode' className='modalInputs' />
             </Modal>
             <CustomBreadcrumb items={breadcrumbItems} />
             <div className='headingAndAddItem'>

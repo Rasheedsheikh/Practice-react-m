@@ -38,3 +38,22 @@
 .modalSelectClass.ant-select .ant-select-selection-item{
     font-weight: 500 !important;
 }
+.filterDatePicker{
+    margin-bottom: 20px;
+    width: 100%;
+    height: 35px;
+}
+.filterBtn{
+    width: 100%;
+    height: 40px;
+    background: #cc4343;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+.filterBtn:hover{
+    background: #ffcece !important;
+    color: #cc4343 !important;
+    border-color: #cc4343 !important;
+    border-width: 2px;
+}
