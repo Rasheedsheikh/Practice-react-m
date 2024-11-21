@@ -23,7 +23,7 @@ const AdminDashboard = () => {
     const breadcrumbItems = [
         { label: 'Home', link: '/' },
         { label: 'Admin' } //  current page
-    ];  
+    ];
 
 
     useEffect(() => {
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
                                 <Card className='dashboardContentCard' key={item.item_id}>
                                     <div className='headerAndImage'>
                                         <h3>{item.item_name}</h3>
-                                        <img src={item.item_img !== null ? item.item_img : `/assets/customer-service.png`} alt='item image' width={70} height={70} />
+                                        <img src={item.item_img !== null ? item.item_img : `/Assets/customer-service.png`} alt='item image' width={70} height={70} />
                                     </div>
                                     <div className='orderListDiv'>
                                         <p>Total orders <b>14</b></p>
