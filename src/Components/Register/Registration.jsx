@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Input, Button, Row, Col, Select, message } from "antd";
 import "./Registration.css"; 
 import { BaseUrl } from '../Constants/Constant'
@@ -8,13 +8,13 @@ const Registration = () => {
   const [loading, setLoading] = useState(false);
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchServices = async () => {
       setLoading(true);
       try {
         const response = await fetch(`${BaseUrl}/service-items/findAllServiceItems`);
         const data = await response.json();
-        setServices(data.data); // Using the 'data' key from the response
+        setServices(data.data); 
       } catch (error) {
         message.error("Failed to fetch services.");
       } finally {
@@ -44,7 +44,7 @@ const Registration = () => {
 
 
     try {
-      const response = await fetch(`${BaseUrl}order-details/createOrder`, {
+      const response = await fetch(`${BaseUrl}/order-details/createOrder`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
