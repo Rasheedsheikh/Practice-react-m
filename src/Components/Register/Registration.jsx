@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Row, Col, Select, message } from "antd";
 import "./Registration.css"; 
-import { BaseUrl } from '../../Constants/Constant'
+import { BaseUrl } from '../Constants/Constant'
 
 const Registration = () => {
   const [services, setServices] = useState([]);
